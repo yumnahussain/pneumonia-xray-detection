@@ -1,2 +1,2 @@
 # capstone
-training a multimodal model to detect pneumonia in chest x-rays in order to build a study tool for med students
+fine-tuning a multimodal model to detect pneumonia in chest x-rays using QLoRA 4-bit quantization
