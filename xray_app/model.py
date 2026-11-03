@@ -8,7 +8,7 @@ the app needs:
 Settings come from environment variables (see README):
   BASE_MODEL_ID          default google/medgemma-4b-it
   ADAPTER_ID             default yhussain/medgemma-4b-it-sft-lora-crc100k
-  ADAPTER_REVISION       default main (branch, tag or commit hash on the Hub)
+  ADAPTER_REVISION       default: the 1-epoch adapter commit (branch, tag or commit hash on the Hub)
   FOLLOWUP_USE_ADAPTER   "1" to answer follow-ups with the adapter on (default "0")
   LOAD_IN_4BIT           "1" (default) to load the base model in 4-bit
   MOCK_MODEL             "1" to use a fake model (no GPU, for testing the UI)
@@ -41,11 +41,15 @@ def _env_flag(name: str, default: str = "0") -> bool:
     return os.environ.get(name, default).strip().lower() in {"1", "true", "yes", "on"}
 
 
+# The 1-epoch adapter. "main" on the Hub is the later, weaker 8-epoch adapter.
+ONE_EPOCH_REVISION = "958e014533b1ea6fc6947e8fdd4325b6977f9e5a"
+
+
 @dataclass
 class Config:
     base_model_id: str = os.environ.get("BASE_MODEL_ID", "google/medgemma-4b-it")
     adapter_id: str = os.environ.get("ADAPTER_ID", "yhussain/medgemma-4b-it-sft-lora-crc100k")
-    adapter_revision: str = os.environ.get("ADAPTER_REVISION", "main")
+    adapter_revision: str = os.environ.get("ADAPTER_REVISION", ONE_EPOCH_REVISION)
     followup_use_adapter: bool = _env_flag("FOLLOWUP_USE_ADAPTER", "0")
     load_in_4bit: bool = _env_flag("LOAD_IN_4BIT", "1")
     max_followup_tokens: int = int(os.environ.get("MAX_FOLLOWUP_TOKENS", "512"))
