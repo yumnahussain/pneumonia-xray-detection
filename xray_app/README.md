@@ -70,10 +70,7 @@ import os
 from google.colab import userdata
 os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
 
-# 3. Pick the adapter version (see "Which adapter version" below)
-os.environ["ADAPTER_REVISION"] = "main"
-
-# 4. Launch with a public link
+# 3. Launch with a public link
 os.environ["SHARE"] = "1"
 !python app.py
 ```
@@ -107,7 +104,7 @@ python -m pytest -q tests
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `ADAPTER_REVISION` | `main` | Branch or commit hash of the adapter on the Hub |
+| `ADAPTER_REVISION` | 1-epoch commit (`958e014…`) | Branch or commit hash of the adapter on the Hub |
 | `FOLLOWUP_USE_ADAPTER` | `0` | `1` = answer follow-ups with the fine-tuned adapter on |
 | `ADAPTER_ID` | `yhussain/medgemma-4b-it-sft-lora-crc100k` | Adapter repo |
 | `BASE_MODEL_ID` | `google/medgemma-4b-it` | Base model |
@@ -118,10 +115,10 @@ python -m pytest -q tests
 
 ### Which adapter version
 
-`main` on the Hub currently holds the **8-epoch** adapter (77.6% accuracy). The better
-1-epoch adapter (94.5%) is in an earlier commit. Find it under *Files and versions →
-History* on the model page and set `ADAPTER_REVISION` to that commit hash. The app shows
-the version in use under each result.
+The app uses the **1-epoch** adapter by default, from commit
+`958e014533b1ea6fc6947e8fdd4325b6977f9e5a` of the adapter repo. The newest version on the Hub (`main`) is the later
+**8-epoch** adapter, which scored lower (77.6% accuracy). To use it instead, set
+`ADAPTER_REVISION=main`. The app shows the version in use under each result.
 
 ### Why follow-ups use the adapter switched off by default
 
