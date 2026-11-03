@@ -1,0 +1,33 @@
+# Python caches (created when you run the app or tests)
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Secrets: never commit your Hugging Face token
+.env
+*.token
+
+# Gradio's local cache folder
+.gradio/
+flagged/
+
+# Model weights and training output (the adapter lives on Hugging Face)
+*.safetensors
+*.bin
+*.pt
+checkpoint-*/
+medgemma-4b-it-sft-lora-crc100k/
+runs/
+
+# Test images: keep X-rays out of the repo for privacy
+test_images/
+*.dcm
+
+# Mac and notebook clutter
+.DS_Store
+.ipynb_checkpoints/

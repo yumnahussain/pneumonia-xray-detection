@@ -1,0 +1,9 @@
+gradio>=5.30,<6
+transformers>=4.53
+peft>=0.17
+accelerate
+bitsandbytes
+torch
+pillow
+numpy
+pytest
